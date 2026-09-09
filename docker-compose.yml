@@ -1,0 +1,40 @@
+# Two ways to run this:
+#
+#   docker compose up app            -> API only, uses bundled SQLite (no Postgres needed)
+#   docker compose up                -> API + Postgres, run the migration script once
+#                                        (see README "Deployment" section) to copy the
+#                                        408k+ rows from SQLite into Postgres
+#
+# The `postgres` service only starts if something depends on it or you
+# explicitly request it, so `docker compose up app` alone stays SQLite-only.
+services:
+  app:
+    build: .
+    ports:
+      - "8420:8420"
+    environment:
+      # Comment this out (or delete the line) to fall back to the bundled
+      # SQLite file baked into the image instead of Postgres.
+      DATABASE_URL: postgresql://renewable:renewable@postgres:5432/renewable_energy_india
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: renewable
+      POSTGRES_PASSWORD: renewable
+      POSTGRES_DB: renewable_energy_india
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U renewable -d renewable_energy_india"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  pgdata:

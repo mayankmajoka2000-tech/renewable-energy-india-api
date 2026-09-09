@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+
+# Bundled SQLite DB (119MB, exceeds GitHub's 100MB file limit).
+# Regenerate locally by running the ingestion pipeline -- see README
+# "Re-running / extending the data pipeline".
+data/renewable_energy_india.db
