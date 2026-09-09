@@ -1,0 +1,26 @@
+# Render Blueprint — deploys this API as a free web service.
+#
+# Uses Render's native Python runtime (not Docker) so the free tier applies
+# with no credit card. The build step downloads the pre-built 426,718-row
+# SQLite snapshot from this repo's GitHub Release (v1.0.0-data) rather than
+# re-running the ~12-minute ingestion pipeline on every deploy/cold start --
+# see README "Running it" for the two data-loading options.
+#
+# Deploy: on render.com, "New +" -> "Blueprint" -> connect this GitHub repo.
+# Free-tier web services spin down after 15 min idle and cold-start on the
+# next request (~30-60s) -- expected behavior for a free demo instance.
+services:
+  - type: web
+    name: renewable-energy-india-api
+    runtime: python
+    plan: free
+    buildCommand: >
+      pip install -r requirements.txt &&
+      mkdir -p data &&
+      curl -L -o data/renewable_energy_india.db
+      https://github.com/mayankmajoka2000-tech/renewable-energy-india-api/releases/download/v1.0.0-data/renewable_energy_india.db
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+    healthCheckPath: /stats/summary

@@ -122,12 +122,22 @@ ruff check app/ tests/ scripts/
 
 ## Running it
 
-**First-time setup — generate the database (~12 min, one-time):**
+**First-time setup — get the database:**
 
 The SQLite database isn't committed to this repo (it's ~119 MB, over
-GitHub's 100 MB file limit). Run the ingestion pipeline once to build it
-locally — see [Re-running / extending the data pipeline](#re-running--extending-the-data-pipeline)
-below for the full command list.
+GitHub's 100 MB file limit). Two ways to get it:
+
+**Option A — download the pre-built snapshot (instant):**
+
+```bash
+cd renewable-energy-india-api
+mkdir -p data
+curl -L -o data/renewable_energy_india.db \
+  https://github.com/mayankmajoka2000-tech/renewable-energy-india-api/releases/download/v1.0.0-data/renewable_energy_india.db
+```
+
+**Option B — regenerate it yourself from the live sources (~12 min, verifies
+every checksum fresh):**
 
 ```bash
 cd renewable-energy-india-api
