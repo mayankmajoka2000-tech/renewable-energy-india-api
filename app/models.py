@@ -10,9 +10,9 @@ ingestion scripts in app/ingestion/, which pull from live official sources.
 from datetime import datetime
 
 from sqlalchemy import (
-    Column, Integer, String, Float, Date, DateTime, ForeignKey, UniqueConstraint, Index, Boolean
+    Column, Integer, String, Float, Date, DateTime, UniqueConstraint, Index, Boolean
 )
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 

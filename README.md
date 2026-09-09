@@ -1,5 +1,8 @@
 # India Renewable Energy & Sustainable Finance API
 
+[![CI](https://github.com/mayankmajoka2000-tech/renewable-energy-india-api/actions/workflows/ci.yml/badge.svg)](https://github.com/mayankmajoka2000-tech/renewable-energy-india-api/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A FastAPI service over **426,718 real, sourced records** covering India's renewable
 energy sector: plant/unit-wise generation and CO2 emissions, individual named RE
 projects, state-wise renewable capacity, and daily satellite-measured solar/wind
@@ -102,7 +105,19 @@ data/
                                locally with the ingestion commands below (~12 min total)
 scripts/
   migrate_sqlite_to_postgres.py   one-time copy of all rows into a Postgres target
+tests/
+  test_api.py       smoke tests (pytest + FastAPI TestClient) against a throwaway
+                     temp DB — routing, schema, and empty-table edge cases; run in CI
 Dockerfile, docker-compose.yml, .env.example   containerized run + Postgres deployment
+.github/workflows/ci.yml   GitHub Actions: ruff lint + pytest on every push/PR
+```
+
+Run the test suite locally with:
+
+```bash
+pip install -r requirements-dev.txt
+pytest -v
+ruff check app/ tests/ scripts/
 ```
 
 ## Running it

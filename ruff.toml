@@ -1,0 +1,12 @@
+line-length = 160
+
+[lint]
+# Keep the CI gate to real correctness issues (pyflakes) and basic style
+# (pycodestyle) rather than pyupgrade/bugbear opinions, so it catches actual
+# bugs (unused imports, undefined names, bare excepts) without demanding a
+# rewrite of working ingestion scripts.
+select = ["E", "F"]
+ignore = [
+    "E402",  # module-level import not at top -- needed in tests/test_api.py
+             # to set DATABASE_URL before importing app modules
+]

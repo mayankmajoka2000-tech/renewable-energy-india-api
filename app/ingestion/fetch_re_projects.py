@@ -45,7 +45,6 @@ import difflib
 import io
 import re
 from collections import defaultdict
-from datetime import datetime
 
 import pdfplumber
 import requests

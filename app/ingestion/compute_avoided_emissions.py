@@ -14,7 +14,6 @@ in this table traces back to an official published figure, nothing is
 back-calculated from assumed capacity factors.
 """
 import io
-import re
 import zipfile
 
 import openpyxl

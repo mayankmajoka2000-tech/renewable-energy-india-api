@@ -22,7 +22,7 @@ import openpyxl
 import requests
 
 from app.database import SessionLocal, init_db
-from app.models import PowerUnit, EmissionFactorYearly
+from app.models import PowerUnit
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; ResearchBot/1.0; +academic use)"}
 
