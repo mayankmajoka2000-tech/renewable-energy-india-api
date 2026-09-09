@@ -3,6 +3,10 @@
 [![CI](https://github.com/mayankmajoka2000-tech/renewable-energy-india-api/actions/workflows/ci.yml/badge.svg)](https://github.com/mayankmajoka2000-tech/renewable-energy-india-api/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+**Live API:** https://renewable-energy-india-api.onrender.com/docs
+(free tier — spins down after 15 min idle, first request after that takes
+~30-60s to wake up)
+
 A FastAPI service over **426,718 real, sourced records** covering India's renewable
 energy sector: plant/unit-wise generation and CO2 emissions, individual named RE
 projects, state-wise renewable capacity, and daily satellite-measured solar/wind
@@ -169,6 +173,16 @@ mounted into the container), then:
 ```bash
 docker compose up app
 ```
+
+**Render (free, live hosting):**
+
+This repo includes a `render.yaml` Blueprint. On [render.com](https://render.com),
+sign up with GitHub, then **New +** → **Blueprint** → select this repo → **Apply**.
+It builds on Render's free Python runtime and downloads the pre-built database
+from the `v1.0.0-data` GitHub Release automatically (no ingestion run needed).
+Free-tier services spin down after 15 min idle and cold-start on the next
+request. The reference deployment above (https://renewable-energy-india-api.onrender.com)
+runs exactly this way.
 
 ## Deployment (Postgres)
 
